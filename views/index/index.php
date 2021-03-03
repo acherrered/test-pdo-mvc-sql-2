@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<center>
-				<h1>CRUD - OFAAOFICIAL - MVC</h1>
+				<h1>CRUD - MVC</h1>
 			</center>
 			<br>
 			<center>
