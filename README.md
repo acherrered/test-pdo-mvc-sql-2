@@ -8,7 +8,7 @@ To the right functioning you need install services of Apache and Mysql or instal
   
 * [xampp](https://www.apachefriends.org/download.html)  
 * [wampserver](http://www.wampserver.com/en/#download-wrapper)
-* [wampserver](http://www.wampserver.com/en/#download-wrapper)
+* [laragon](https://laragon.org/download/)
 
 
 Execute services of Apache and Mysql.
@@ -24,4 +24,4 @@ To test project you need to go to the URL of the local server is usually `http:/
 
 
 ## License 🔥
-Copyright © 2017-present []() 🧔
+Copyright © 2021-present []() 🧔
