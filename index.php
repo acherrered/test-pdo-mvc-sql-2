@@ -18,6 +18,5 @@ if (file_exists('controllers/' . $c . '.php')) {
 }
 
 /*
-	CRUD creado por Oscar Amado
-	Contacto: oscarfamado@gmail.com
+
 */
