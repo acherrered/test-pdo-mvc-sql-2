@@ -1,7 +1,6 @@
 <?php
 /*
-	CRUD creado por Oscar Amado
-	Contacto: oscarfamado@gmail.com
+DB update depending on the request
 */
 class Administrator extends db{
 	

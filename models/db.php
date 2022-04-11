@@ -23,7 +23,31 @@ class db{
     )"
   );
  //$connect = null;     
-	return $connect;	
+     
+  $res = $connect->exec(
+       "CREATE TABLE IF NOT EXISTS agents (
+    id_agent INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT, 
+    family_name TEXT,
+    birthdate TEXT,
+    identification TEXT,
+    nationality TEXT,
+    speciality TEXT
+    )"
+    );
+
+  $res = $connect->exec(
+       "CREATE TABLE IF NOT EXISTS contacts (
+    id_contact INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT, 
+    family_name TEXT,
+    birthdate TEXT,
+    identification TEXT,
+    nationality TEXT
+    )"
+    );
+      
+  return $connect;
       
 		} catch (Exception $e) {
 			die('Error db(connect) '.$e->getMessage());
