@@ -49,6 +49,27 @@ function readagents(){
 
 /***** Agents ****/
 
+
+/***** Contacts ****/
+
+
+
+function readcontacts(){
+        $.ajax({        
+        		type: 'POST',
+                url:   '?c=contacts&m=table_contacts',               
+                beforeSend: function () {
+                        $("#information").html("Procesando, espere por favor...");
+                },
+                success:  function (response) {
+                        $("#information").html(response);
+                }
+        });
+}
+
+/***** Contacts ****/
+
+
 function register(){
 	name 		= document.formUser.name.value;
 	last_name 	= document.formUser.last_name.value;
@@ -84,6 +105,25 @@ function registeragent(){
 	}
 ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 ajax.send("name="+name+"&family_name="+family_name+"&birthdate="+birthdate+"&identification="+identification+"&nationality="+nationality+"&speciality="+speciality+"&id="+id);
+}	
+
+function registercontact(){
+	name 		= document.formContact.name.value;
+	family_name 	= document.formContact.family_name.value;
+	birthdate 		= document.formContact.birthdate.value;
+  identification = document.formContact.identification.value;
+	nationality 		= document.formContact.nationality.value;
+	ajax = objectAjax();
+	ajax.open("POST", "?c=contacts&m=registercontact", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){			
+			read();			
+			alert('Data saved successfully.');			
+			$('#addContact').modal('hide');
+		}
+	}
+ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ajax.send("name="+name+"&family_name="+family_name+"&birthdate="+birthdate+"&identification="+identification+"&nationality="+nationality+"&id="+id);
 }	
 
 
@@ -126,6 +166,26 @@ ajax.send("name="+name+"&family_name="+family_name+"&birthdate="+birthdate+"&ide
 
 }
 
+function updatecontact(){
+	id 			= document.formContactUpdate.id.value;
+	name 		= document.formContactUpdate.name.value;
+	family_name 	= document.formContactUpdate.family_name.value;
+	birthdate 		= document.formContactUpdate.birthdate.value;
+  identification = document.formContactUpdate.identification.value;
+	nationality 		= document.formContactUpdate.nationality.value;
+	ajax = objectAjax();
+	ajax.open("POST", "?c=contacts&m=updatecontact", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){
+			read();
+			$('#updateContact').modal('hide');
+		}
+	}
+ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ajax.send("name="+name+"&family_name="+family_name+"&birthdate="+birthdate+"&identification="+identification+"&nationality="+nationality+"&id="+id);
+
+}
+
 function deleteUser(id){	
 	if(confirm('¿Esta seguro de eliminar este registro?')){						
 	ajax = objectAjax();
@@ -154,6 +214,20 @@ function deleteAgent(id){
 	}
 }
 
+function deleteContact(id){	
+	if(confirm('Are you sure you want to delete this agent?')){						
+	ajax = objectAjax();
+	ajax.open("POST", "?c=contacts&m=deletecontact", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){			
+			read();		
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("id="+id);
+	}
+}
+
 function ModalRegister(){
 	$('#addUser').modal('show');
 }
@@ -161,6 +235,11 @@ function ModalRegister(){
 function ModalRegisterAgent(){
 	$('#addAgent').modal('show');
 }
+
+function ModalRegisterContact(){
+	$('#addContact').modal('show');
+}
+
 
 function ModalUpdate(id,name,last_name,email){			
 	document.formUserUpdate.id.value 			= id;
@@ -179,6 +258,16 @@ document.formAgentUpdate.id.value 			= id;
 	document.formAgentUpdate.nationality.value 			= nationality;
 	document.formAgentUpdate.speciality.value 			= speciality;
 	$('#updateAgent').modal('show');
+}
+
+function ModalUpdateContact(id,name,family_name,birthdate,identification,nationality){			
+document.formContactUpdate.id.value 			= id;
+	document.formContactUpdate.name.value 			= name;
+	document.formContactUpdate.family_name.value 	= family_name;
+	document.formContactUpdate.birthdate.value 		= birthdate;
+	document.formContactUpdate.identification.value 		= identification;
+	document.formContactUpdate.nationality.value 			= nationality;
+	$('#updateContact').modal('show');
 }
 
 /*

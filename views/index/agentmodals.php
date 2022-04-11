@@ -42,10 +42,10 @@
                         <input id="speciality" type="text" class="form-control" name="speciality"
                             placeholder="Speciality" required autocomplete="off">
                     </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Register</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Register</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -53,7 +53,7 @@
 </div>
 
 
-<dv id="updateAgent" class="modal fade" role="dialog">
+<div id="updateAgent" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -62,7 +62,7 @@
             </div>
             <div class="modal-body">
                 <form name="formAgentUpdate" onsubmit="updateagent(); return false">
-                  <input type="text" name="id" id="id" style="display: none;">
+                    <input type="text" name="id" id="id" style="display: none;">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="name" type="text" class="form-control" name="name" placeholder="Name" required
@@ -98,10 +98,10 @@
                         <input id="speciality" type="text" class="form-control" name="speciality"
                             placeholder="Speciality" required autocomplete="off">
                     </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Register</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Register</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>

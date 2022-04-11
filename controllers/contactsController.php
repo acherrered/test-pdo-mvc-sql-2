@@ -3,17 +3,17 @@
 	CRUD creado por Oscar Amado
 	Contacto: oscarfamado@gmail.com
 */
-class agentsController extends Agents{
+class contactsController extends Contacts{
 
 	function index(){
 	require_once('views/all/header.php');
 	require_once('views/all/nav.php');
-	//require_once('views/index/index.php');
-	require_once('views/index/agentmodals.php');
+	require_once('views/index/index.php');
+	require_once('views/index/contactmodals.php');
 	require_once('views/all/footer.php');
 	}
 
-	function table_agents(){
+	function table_contacts(){
 		?>
 		<table class="table table-bordered">
 			<thead>
@@ -24,28 +24,26 @@ class agentsController extends Agents{
         <th>Birthdate</th>
         <th>identification</th>
 				<th>Nationality</th>
-				<th>Speciality</th>
 				</tr>
 			</thead>
 			<tbody >		
 		<?php
-		foreach (parent::get_view_agents()	as $data) {
+		foreach (parent::get_view_contacts()	as $data) {
 		?>
 		<tr>
-			<td><?php echo $data->id_agent; ?> </td>
+			<td><?php echo $data->id_contact; ?> </td>
 			<td><?php echo $data->name; ?> </td>
 			<td><?php echo $data->family_name; ?> </td>
 			<td><?php echo $data->birthdate; ?> </td>
 			<td><?php echo $data->identification; ?> </td>
       <td><?php echo $data->nationality; ?> </td>
-      <td><?php echo $data->speciality; ?> </td>
 			<td>
 			  <div class="btn-group">
 			    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 			    Seleccionar <span class="caret"></span></button>
 			    <ul class="dropdown-menu" role="menu">
-			      <li><a href="#" onclick="ModalUpdateAgent('<?php echo $data->id_agent; ?>','<?php echo $data->name; ?>','<?php echo $data->family_name; ?>','<?php echo $data->birthdate; ?>','<?php echo $data->identification; ?>','<?php echo $data->nationality; ?>','<?php echo $data->speciality; ?>');">Actualizar</a></li>
-			      <li><a href="#" onclick="deleteAgent('<?php echo $data->id_agent; ?>');">Borrar</a></li>
+			      <li><a href="#" onclick="ModalUpdateContact('<?php echo $data->id_contact; ?>','<?php echo $data->name; ?>','<?php echo $data->family_name; ?>','<?php echo $data->birthdate; ?>','<?php echo $data->identification; ?>','<?php echo $data->nationality; ?>');">Actualizar</a></li>
+			      <li><a href="#" onclick="deleteContact('<?php echo $data->id_contact; ?>');">Borrar</a></li>
 			    </ul>
 			  </div>
 			</td>
@@ -58,23 +56,22 @@ class agentsController extends Agents{
 	<?php	
     }
     
-	function deleteagent(){		
-			parent::set_delete_agent($_REQUEST['id']);		
+	function deletecontact(){		
+			parent::set_delete_contact($_REQUEST['id']);		
     }
 
-	function registeragent(){
+	function registercontact(){
 		$data = array(
 					'name' 		=> $_REQUEST['name'],
 					'family_name' => $_REQUEST['family_name'],
 					'birthdate'		=> $_REQUEST['birthdate'],
       		'identification'		=> $_REQUEST['identification'],
       		'nationality'		=> $_REQUEST['nationality'],
-          'speciality'		=> $_REQUEST['speciality']
 					);		
-					parent::set_register_agent($data);		
+					parent::set_register_contact($data);		
     }    
     
-	function updateagent(){
+	function updatecontact(){
 		$data = array(
 					'id'		=> $_REQUEST['id'],
 					'name' 		=> $_REQUEST['name'],
@@ -82,9 +79,8 @@ class agentsController extends Agents{
 					'birthdate'		=> $_REQUEST['birthdate'],
       		'identification'		=> $_REQUEST['identification'],
       		'nationality'		=> $_REQUEST['nationality'],
-          'speciality'		=> $_REQUEST['speciality']
 					);
-			parent::set_update_agent($data);		
+			parent::set_update_contact($data);		
 	}    
     
 }

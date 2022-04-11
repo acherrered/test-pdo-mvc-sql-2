@@ -11,6 +11,7 @@ class administratorController extends Administrator{
 		require_once('views/index/index.php');
 		require_once('views/index/modals.php');
 	  require_once('views/index/agentmodals.php');
+	  require_once('views/index/contactmodals.php');
 		require_once('views/all/footer.php');
 	}
 

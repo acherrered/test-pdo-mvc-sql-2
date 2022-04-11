@@ -8,7 +8,7 @@ class agentsController extends Agents{
 	function index(){
 	require_once('views/all/header.php');
 	require_once('views/all/nav.php');
-	//require_once('views/index/index.php');
+	require_once('views/index/index.php');
 	require_once('views/index/agentmodals.php');
 	require_once('views/all/footer.php');
 	}
