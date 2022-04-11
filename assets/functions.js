@@ -15,7 +15,7 @@ function objectAjax(){
 	return xmlhttp;
 }
 //Inicializo automaticamente la funcion read al entrar a la pagina o recargar la pagina;
-addEventListener('load', read, false);
+//addEventListener('load', read, false);
 
 function read(){
         $.ajax({        
@@ -30,6 +30,25 @@ function read(){
         });
 }
 
+/***** Agents ****/
+
+//addEventListener('load', readagents, false);
+
+function readagents(){
+        $.ajax({        
+        		type: 'POST',
+                url:   '?c=agents&m=table_agents',               
+                beforeSend: function () {
+                        $("#information").html("Procesando, espere por favor...");
+                },
+                success:  function (response) {
+                        $("#information").html(response);
+                }
+        });
+}
+
+/***** Agents ****/
+
 function register(){
 	name 		= document.formUser.name.value;
 	last_name 	= document.formUser.last_name.value;
@@ -39,13 +58,34 @@ function register(){
 	ajax.onreadystatechange=function() {
 		if(ajax.readyState==4){			
 			read();			
-			alert('Los datos guardaron correctamente.');			
+			alert('Data saved successfully.');			
 			$('#addUser').modal('hide');
 		}
 	}
 ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 ajax.send("name="+name+"&last_name="+last_name+"&email="+email);
+}
+
+function registeragent(){
+	name 		= document.formAgent.name.value;
+	family_name 	= document.formAgent.family_name.value;
+	birthdate 		= document.formAgent.birthdate.value;
+  identification = document.formAgent.identification.value;
+	nationality 		= document.formAgent.nationality.value;
+  speciality = document.formAgent.speciality.value;
+	ajax = objectAjax();
+	ajax.open("POST", "?c=agents&m=registeragent", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){			
+			read();			
+			alert('Data saved successfully.');			
+			$('#addAgent').modal('hide');
+		}
+	}
+ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ajax.send("name="+name+"&family_name="+family_name+"&birthdate="+birthdate+"&identification="+identification+"&nationality="+nationality+"&speciality="+speciality+"&id="+id);
 }	
+
 
 function update(){
 	id 			= document.formUserUpdate.id.value;
@@ -65,6 +105,27 @@ ajax.send("name="+name+"&last_name="+last_name+"&email="+email+"&id="+id);
 
 }
 
+function updateagent(){
+	id 			= document.formAgentUpdate.id.value;
+	name 		= document.formAgentUpdate.name.value;
+	family_name 	= document.formAgentUpdate.family_name.value;
+	birthdate 		= document.formAgentUpdate.birthdate.value;
+  identification = document.formAgentUpdate.identification.value;
+	nationality 		= document.formAgentUpdate.nationality.value;
+  speciality = document.formAgentUpdate.speciality.value;
+	ajax = objectAjax();
+	ajax.open("POST", "?c=agents&m=updateagent", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){
+			read();
+			$('#updateAgent').modal('hide');
+		}
+	}
+ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ajax.send("name="+name+"&family_name="+family_name+"&birthdate="+birthdate+"&identification="+identification+"&nationality="+nationality+"&speciality="+speciality+"&id="+id);
+
+}
+
 function deleteUser(id){	
 	if(confirm('¿Esta seguro de eliminar este registro?')){						
 	ajax = objectAjax();
@@ -79,8 +140,26 @@ function deleteUser(id){
 	}
 }
 
+function deleteAgent(id){	
+	if(confirm('Are you sure you want to delete this agent?')){						
+	ajax = objectAjax();
+	ajax.open("POST", "?c=agents&m=deleteagent", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){			
+			read();		
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("id="+id);
+	}
+}
+
 function ModalRegister(){
 	$('#addUser').modal('show');
+}
+
+function ModalRegisterAgent(){
+	$('#addAgent').modal('show');
 }
 
 function ModalUpdate(id,name,last_name,email){			
@@ -89,6 +168,17 @@ function ModalUpdate(id,name,last_name,email){
 	document.formUserUpdate.last_name.value 	= last_name;
 	document.formUserUpdate.email.value 		= email;
 	$('#updateUser').modal('show');
+}
+
+function ModalUpdateAgent(id,name,family_name,birthdate,identification,nationality,speciality){			
+document.formAgentUpdate.id.value 			= id;
+	document.formAgentUpdate.name.value 			= name;
+	document.formAgentUpdate.family_name.value 	= family_name;
+	document.formAgentUpdate.birthdate.value 		= birthdate;
+	document.formAgentUpdate.identification.value 		= identification;
+	document.formAgentUpdate.nationality.value 			= nationality;
+	document.formAgentUpdate.speciality.value 			= speciality;
+	$('#updateAgent').modal('show');
 }
 
 /*
