@@ -47,6 +47,15 @@ class db{
     )"
     );
       
+  $res = $connect->exec(
+       "CREATE TABLE IF NOT EXISTS hideouts (
+    id_hideout INTEGER PRIMARY KEY AUTOINCREMENT,
+    address TEXT, 
+    country TEXT,
+    identificatiob TEXT
+    )"
+    );
+      
   return $connect;
       
 		} catch (Exception $e) {
