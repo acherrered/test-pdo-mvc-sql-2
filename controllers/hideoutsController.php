@@ -10,6 +10,7 @@ class hideoutsController extends Hideouts{
 	require_once('views/all/nav.php');
 	require_once('views/index/index.php');
 	require_once('views/index/contactmodals.php');
+  require_once('views/index/hideoutsmodals.php');
 	require_once('views/all/footer.php');
 	}
 
@@ -22,6 +23,7 @@ class hideoutsController extends Hideouts{
 				<th>Address</th>
 				<th>country</th>
         <th>identification</th>
+        <th>type</th>
 				</tr>
 			</thead>
 			<tbody >		
@@ -33,12 +35,13 @@ class hideoutsController extends Hideouts{
 			<td><?php echo $data->address; ?> </td>
 			<td><?php echo $data->country; ?> </td>
 			<td><?php echo $data->identification; ?> </td>
+			<td><?php echo $data->type; ?> </td>
 			<td>
 			  <div class="btn-group">
 			    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 			    Seleccionar <span class="caret"></span></button>
 			    <ul class="dropdown-menu" role="menu">
-			      <li><a href="#" onclick="ModalUpdateHideout('<?php echo $data->id_hideout; ?>','<?php echo $data->address; ?>','<?php echo $data->country; ?>','<?php echo $data->identification; ?>');">Actualizar</a></li>
+			      <li><a href="#" onclick="ModalUpdateHideout('<?php echo $data->id_hideout; ?>','<?php echo $data->address; ?>','<?php echo $data->country; ?>','<?php echo $data->identification; ?>','<?php echo $data->type; ?>');">Actualizar</a></li>
 			      <li><a href="#" onclick="deleteHideout('<?php echo $data->id_hideout; ?>');">Borrar</a></li>
 			    </ul>
 			  </div>
@@ -56,11 +59,12 @@ class hideoutsController extends Hideouts{
 			parent::set_delete_hideout($_REQUEST['id']);		
     }
 
-	function registerhidoute(){
+	function registerhideout(){
 		$data = array(
 					'address' 		=> $_REQUEST['address'],
 					'country' => $_REQUEST['country'],
-      		'identification'		=> $_REQUEST['identification']
+      		'identification'		=> $_REQUEST['identification'],
+      		'type'		=> $_REQUEST['type']
 					);		
 					parent::set_register_hideout($data);		
     }    
@@ -70,9 +74,11 @@ class hideoutsController extends Hideouts{
 					'id'		=> $_REQUEST['id'],
 					'address' 		=> $_REQUEST['address'],
 					'country' => $_REQUEST['country'],
-      		'identification'		=> $_REQUEST['identification']
+      		'identification'		=> $_REQUEST['identification'],
+      		'type'		=> $_REQUEST['type']
 					);
-			parent::set_update_hideout($data);		
+			parent::set_update_hideout($data);
+    var_dump($data);
 	}    
     
 }

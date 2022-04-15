@@ -4,14 +4,14 @@ DB update depending on the request
 */
 class Hideouts extends db{
 	
-	private function view_chideouts(){
+	private function view_hideouts(){
 		try {
 			$SQL = "SELECT * FROM hideouts";
 			$result = $this->connect()->prepare($SQL);
 			$result->execute();
 			return $result->fetchAll(PDO::FETCH_OBJ);	
 		} catch (Exception $e) {
-			die('Error hideouts(view_users) '.$e->getMessage());
+			die('Error hideouts(view_hideouts) '.$e->getMessage());
 		} finally{
 			$result = null;
 		}
@@ -23,12 +23,13 @@ class Hideouts extends db{
 
 	private function register_hideouts($data){
 		try {
-			$SQL = 'INSERT INTO hideouts (name,address,country,identification) VALUES (?,?,?)';
+			$SQL = 'INSERT INTO hideouts (address,country,identification,type) VALUES (?,?,?,?)';
 			$result = $this->connect()->prepare($SQL);
 			$result->execute(array(
 									$data['address'],
 									$data['country'],
-									$data['identification']
+									$data['identification'],
+									$data['type']
 									)
 							);			
 		} catch (Exception $e) {
@@ -44,12 +45,14 @@ class Hideouts extends db{
 
 	private function update_hideout($data){
 		try {
-			$SQL = 'UPDATE hideouts SET address = ?, country = ?, identification = ? WHERE id_hideout = ?';
+			$SQL = 'UPDATE hideouts SET address = ?, country = ?, identification = ?, type = ? WHERE id_hideout = ?';
 			$result = $this->connect()->prepare($SQL);
 			$result->execute(array(
 									$data['address'],
 									$data['country'],
-        				  $data['identification']
+									$data['identification'],
+									$data['type'],
+									$data['id']
 									)
 							);			
 		} catch (Exception $e) {

@@ -15,6 +15,10 @@
 
         <button type="button" onclick="readcontacts();" class="btn btn-success">Contacts list</button>
         <button type="button" onclick="ModalRegisterContact();" class="btn btn-success">Add contacts</button>
+
+        <button type="button" onclick="readhideouts();" class="btn btn-success">Hideouts list</button>
+        <button type="button" onclick="ModalRegisterHideout();" class="btn btn-success">Add hideouts</button>
+        
 			</center>
 			<br>
 			<div id="information">

@@ -52,7 +52,8 @@ class db{
     id_hideout INTEGER PRIMARY KEY AUTOINCREMENT,
     address TEXT, 
     country TEXT,
-    identificatiob TEXT
+    identification TEXT,
+    type TEXT
     )"
     );
       

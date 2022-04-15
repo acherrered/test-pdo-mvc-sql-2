@@ -52,8 +52,6 @@ function readagents(){
 
 /***** Contacts ****/
 
-
-
 function readcontacts(){
         $.ajax({        
         		type: 'POST',
@@ -67,7 +65,22 @@ function readcontacts(){
         });
 }
 
-/***** Contacts ****/
+/***** Hideouts ****/
+
+function readhideouts(){
+        $.ajax({        
+        		type: 'POST',
+                url:   '?c=hideouts&m=table_hideouts',               
+                beforeSend: function () {
+                        $("#information").html("Procesando, espere por favor...");
+                },
+                success:  function (response) {
+                        $("#information").html(response);
+                }
+        });
+}
+
+/***** Hideouts ****/
 
 
 function register(){
@@ -124,6 +137,25 @@ function registercontact(){
 	}
 ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 ajax.send("name="+name+"&family_name="+family_name+"&birthdate="+birthdate+"&identification="+identification+"&nationality="+nationality+"&id="+id);
+}	
+
+
+function registerhideout(){
+	address 		= document.formHideout.address.value;
+  country = document.formHideout.country.value;
+  identification 	= document.formHideout.identification.value;
+  type 	= document.formHideout.type.value;
+	ajax = objectAjax();
+	ajax.open("POST", "?c=hideouts&m=registerhideout", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){			
+			read();			
+			alert('Data saved successfully.');			
+			$('#addHideout').modal('hide');
+		}
+	}
+ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ajax.send("address="+address+"&country="+country+"&identification="+identification+"&type="+type+"&id="+id);
 }	
 
 
@@ -186,6 +218,28 @@ ajax.send("name="+name+"&family_name="+family_name+"&birthdate="+birthdate+"&ide
 
 }
 
+function updatehideout(){
+	id 			= document.formHideoutUpdate.id.value;
+	address 		= document.formHideoutUpdate.address.value;
+	country 	= document.formHideoutUpdate.country.value;
+  identification = document.formHideoutUpdate.identification.value;
+  type = document.formHideoutUpdate.type.value;
+
+	ajax = objectAjax();
+	ajax.open("POST", "?c=hideouts&m=updatehideout", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){
+			readhideouts();
+			$('#updateHideout').modal('hide');
+		}
+	}
+ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ajax.send("address="+address+"&country="+country+"&identification="+identification+"&type="+type+"&id="+id);
+console.log(updatehideout)
+}
+
+
+
 function deleteUser(id){	
 	if(confirm('¿Esta seguro de eliminar este registro?')){						
 	ajax = objectAjax();
@@ -228,6 +282,20 @@ function deleteContact(id){
 	}
 }
 
+function deleteHideout(id){	
+	if(confirm('Are you sure you want to delete this agent?')){						
+	ajax = objectAjax();
+	ajax.open("POST", "?c=hideouts&m=deletehideout", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){			
+			read();		
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("id="+id);
+	}
+}
+
 function ModalRegister(){
 	$('#addUser').modal('show');
 }
@@ -238,6 +306,10 @@ function ModalRegisterAgent(){
 
 function ModalRegisterContact(){
 	$('#addContact').modal('show');
+}
+
+function ModalRegisterHideout(){
+	$('#addHideout').modal('show');
 }
 
 
@@ -268,6 +340,16 @@ document.formContactUpdate.id.value 			= id;
 	document.formContactUpdate.identification.value 		= identification;
 	document.formContactUpdate.nationality.value 			= nationality;
 	$('#updateContact').modal('show');
+}
+
+
+function ModalUpdateHideout(id,address,country,identification,type){			
+document.formHideoutUpdate.id.value 			= id;
+	document.formHideoutUpdate.address.value 			= address;
+	document.formHideoutUpdate.country.value 	= country;
+	document.formHideoutUpdate.identification.value 		= identification;
+	document.formHideoutUpdate.type.value 		= type;
+	$('#updateHideout').modal('show');
 }
 
 /*

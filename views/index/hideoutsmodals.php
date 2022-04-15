@@ -1,4 +1,4 @@
-<div id="addContact" class="modal fade" role="dialog">
+<div id="addHideout" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,23 +6,17 @@
                 <h4 class="modal-title">Add agent</h4>
             </div>
             <div class="modal-body">
-                <form name="formContact" onsubmit="registercontact(); return false">
+                <form name="formHideout" onsubmit="registerhideout(); return false">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="name" type="text" class="form-control" name="name" placeholder="Name" required
+                        <input id="address" type="text" class="form-control" name="address" placeholder="Address" required
                             autocomplete="off">
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="family_name" type="text" class="form-control" name="family_name"
-                            placeholder="Family name" required autocomplete="off">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input id="birthdate" type="date" class="form-control" name="birthdate" placeholder="Birth date"
-                            required autocomplete="off">
+                        <input id="country" type="text" class="form-control" name="country"
+                            placeholder="Country" required autocomplete="off">
                     </div>
                     <br>
                     <div class="input-group">
@@ -33,8 +27,8 @@
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="nationality" type="text" class="form-control" name="nationality"
-                            placeholder="Nationality" required autocomplete="off">
+                        <input id="type" type="text" class="form-control" name="type"
+                            placeholder="type" required autocomplete="off">
                     </div>
                     <br>
                     <div class="modal-footer">
@@ -47,7 +41,7 @@
     </div>
 </div>
 
-<div id="updateContact" class="modal fade" role="dialog">
+<div id="updateHideout" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -55,24 +49,18 @@
                 <h4 class="modal-title">Update contact</h4>
             </div>
             <div class="modal-body">
-                <form name="formContactUpdate" onsubmit="updatecontact(); return false">
+                <form name="formHideoutUpdate" onsubmit="updatehideout(); return false">
                     <input type="text" name="id" id="id" style="display: none;">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="name" type="text" class="form-control" name="name" placeholder="Name" required
+                        <input id="address" type="text" class="form-control" name="address" placeholder="Address" required
                             autocomplete="off">
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="family_name" type="text" class="form-control" name="family_name"
-                            placeholder="Family name" required autocomplete="off">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input id="birthdate" type="date" class="form-control" name="birthdate" placeholder="Birth date"
-                            required autocomplete="off">
+                        <input id="country" type="text" class="form-control" name="country"
+                            placeholder="Country" required autocomplete="off">
                     </div>
                     <br>
                     <div class="input-group">
@@ -83,9 +71,10 @@
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="nationality" type="text" class="form-control" name="nationality"
-                            placeholder="Nationality" required autocomplete="off">
+                        <input id="type" type="text" class="form-control" name="type"
+                            placeholder="type" required autocomplete="off">
                     </div>
+                    <br>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Register</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
