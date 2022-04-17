@@ -100,6 +100,23 @@ function readadmins(){
 
 /***** adminss ****/
 
+/***** targets ****/
+
+function readtargets(){
+        $.ajax({        
+        		type: 'POST',
+                url:   '?c=targets&m=table_targets',               
+                beforeSend: function () {
+                        $("#information").html("Procesando, espere por favor...");
+                },
+                success:  function (response) {
+                        $("#information").html(response);
+                }
+        });
+}
+
+/***** targets ****/
+
 
 function register(){
 	name 		= document.formUser.name.value;
@@ -193,6 +210,24 @@ function registeradmin(){
 	}
 ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 ajax.send("name="+name+"&family="+family+"&date="+date+"&email="+email+"&password="+password+"&id="+id);
+}	
+
+function registertarget(){
+	name 		= document.formTarget.name.value;
+  family = document.formTarget.family.value;
+	identification 		= document.formTarget.identification.value;
+  nationality = document.formTarget.nationality.value;
+	ajax = objectAjax();
+	ajax.open("POST", "?c=targets&m=registertarget", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){			
+			read();			
+			alert('Data saved successfully.');			
+			$('#addTarget').modal('hide');
+		}
+	}
+ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ajax.send("name="+name+"&family="+family+"&identification="+identification+"&nationality="+nationality+"&id="+id);
 }	
 
 
@@ -295,6 +330,25 @@ ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 ajax.send("name="+name+"&family="+family+"&date="+date+"&email="+email+"&password="+password+"&id="+id);
 }
 
+function updatetarget(){
+	id 			= document.formTargetUpdate.id.value;
+	name 		= document.formTargetUpdate.name.value;
+  family = document.formTargetUpdate.family.value;
+	identification 		= document.formTargetUpdate.identification.value;
+  nationality = document.formTargetUpdate.nationality.value;
+
+	ajax = objectAjax();
+	ajax.open("POST", "?c=targets&m=updatetarget", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){
+			readtargets();
+			$('#updateTarget').modal('hide');
+		}
+	}
+ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ajax.send("name="+name+"&family="+family+"&identification="+identification+"&nationality="+nationality+"&id="+id);
+}
+
 
 
 function deleteUser(id){	
@@ -367,6 +421,20 @@ function deleteAdmin(id){
 	}
 }
 
+function deleteTarget(id){	
+	if(confirm('Are you sure you want to delete this agent?')){						
+	ajax = objectAjax();
+	ajax.open("POST", "?c=targets&m=deletetarget", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){			
+			readtargets();		
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("id="+id);
+	}
+}
+
 
 
 function ModalRegister(){
@@ -387,6 +455,10 @@ function ModalRegisterHideout(){
 
 function ModalRegisterAdmin(){
 	$('#addAdmin').modal('show');
+}
+
+function ModalRegisterTarget(){
+	$('#addTarget').modal('show');
 }
 
 
@@ -437,6 +509,15 @@ document.formAdminUpdate.id.value 			= id;
 	document.formAdminUpdate.email.value 		= email;
   document.formAdminUpdate.password.value 		= password;
 	$('#updateAdmin').modal('show');
+}
+
+function ModalUpdateTarget(id,name,family,identification,nationality){			
+document.formTargetUpdate.id.value 			= id;
+	document.formTargetUpdate.name.value 			= name;
+	document.formTargetUpdate.family.value 	= family;
+	document.formTargetUpdate.identification.value 		= identification;
+	document.formTargetUpdate.nationality.value 		= nationality;
+	$('#updateTarget').modal('show');
 }
 
 /*

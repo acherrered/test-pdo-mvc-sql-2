@@ -66,6 +66,16 @@ class db{
     password TEXT
     )"
   );
+
+    $res = $connect->exec(
+    "CREATE TABLE IF NOT EXISTS targets (
+    id_target INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    family TEXT,
+    identification TEXT,
+    nationality TEXT
+    )"
+  );
       
   return $connect;
       

@@ -23,6 +23,9 @@
 
         <button type="button" onclick="readadmins();" class="btn btn-success">Admins list</button>
         <button type="button" onclick="ModalRegisterAdmin();" class="btn btn-success">Add Admins</button>
+
+        <button type="button" onclick="readtargets();" class="btn btn-success">Targets list</button>
+        <button type="button" onclick="ModalRegisterTarget();" class="btn btn-success">Add Targets</button>
         
 			</center>
 			<br>
