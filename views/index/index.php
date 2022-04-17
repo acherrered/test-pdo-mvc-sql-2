@@ -1,3 +1,4 @@
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -5,6 +6,7 @@
 				<h1>CRUD - MVC</h1>
 			</center>
 			<br>
+      <a href="logout.php">Logout </a>
 			<center>
 				<button type="button" onclick="ModalRegister();" class="btn btn-success">Agregar usuario</button>
         <button type="button" onclick="read();" class="btn btn-success">admin</button>
@@ -18,6 +20,9 @@
 
         <button type="button" onclick="readhideouts();" class="btn btn-success">Hideouts list</button>
         <button type="button" onclick="ModalRegisterHideout();" class="btn btn-success">Add hideouts</button>
+
+        <button type="button" onclick="readadmins();" class="btn btn-success">Admins list</button>
+        <button type="button" onclick="ModalRegisterAdmin();" class="btn btn-success">Add Admins</button>
         
 			</center>
 			<br>

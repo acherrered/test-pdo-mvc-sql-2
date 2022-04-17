@@ -83,6 +83,24 @@ function readhideouts(){
 /***** Hideouts ****/
 
 
+/***** admins ****/
+
+function readadmins(){
+        $.ajax({        
+        		type: 'POST',
+                url:   '?c=admins&m=table_admins',               
+                beforeSend: function () {
+                        $("#information").html("Procesando, espere por favor...");
+                },
+                success:  function (response) {
+                        $("#information").html(response);
+                }
+        });
+}
+
+/***** adminss ****/
+
+
 function register(){
 	name 		= document.formUser.name.value;
 	last_name 	= document.formUser.last_name.value;
@@ -156,6 +174,25 @@ function registerhideout(){
 	}
 ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 ajax.send("address="+address+"&country="+country+"&identification="+identification+"&type="+type+"&id="+id);
+}	
+
+function registeradmin(){
+	name 		= document.formAdmin.name.value;
+  family = document.formAdmin.family.value;
+	date 		= document.formAdmin.date.value;
+  email = document.formAdmin.email.value;
+  password 	= document.formAdmin.password.value;
+	ajax = objectAjax();
+	ajax.open("POST", "?c=admins&m=registeradmin", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){			
+			read();			
+			alert('Data saved successfully.');			
+			$('#addAdmin').modal('hide');
+		}
+	}
+ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ajax.send("name="+name+"&family="+family+"&date="+date+"&email="+email+"&password="+password+"&id="+id);
 }	
 
 
@@ -238,6 +275,26 @@ ajax.send("address="+address+"&country="+country+"&identification="+identificati
 console.log(updatehideout)
 }
 
+function updateadmin(){
+	id 			= document.formAdminUpdate.id.value;
+	name 		= document.formAdminUpdate.name.value;
+  family = document.formAdminUpdate.family.value;
+	date 		= document.formAdminUpdate.date.value;
+  email = document.formAdminUpdate.email.value;
+  password 	= document.formAdminUpdate.password.value;
+
+	ajax = objectAjax();
+	ajax.open("POST", "?c=admins&m=updateadmin", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){
+			readadmins();
+			$('#updateAdmin').modal('hide');
+		}
+	}
+ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ajax.send("name="+name+"&family="+family+"&date="+date+"&email="+email+"&password="+password+"&id="+id);
+}
+
 
 
 function deleteUser(id){	
@@ -296,6 +353,22 @@ function deleteHideout(id){
 	}
 }
 
+function deleteAdmin(id){	
+	if(confirm('Are you sure you want to delete this agent?')){						
+	ajax = objectAjax();
+	ajax.open("POST", "?c=admins&m=deleteadmin", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){			
+			read();		
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("id="+id);
+	}
+}
+
+
+
 function ModalRegister(){
 	$('#addUser').modal('show');
 }
@@ -310,6 +383,10 @@ function ModalRegisterContact(){
 
 function ModalRegisterHideout(){
 	$('#addHideout').modal('show');
+}
+
+function ModalRegisterAdmin(){
+	$('#addAdmin').modal('show');
 }
 
 
@@ -350,6 +427,16 @@ document.formHideoutUpdate.id.value 			= id;
 	document.formHideoutUpdate.identification.value 		= identification;
 	document.formHideoutUpdate.type.value 		= type;
 	$('#updateHideout').modal('show');
+}
+
+function ModalUpdateAdmin(id,name,family,date,email,password){			
+document.formAdminUpdate.id.value 			= id;
+	document.formAdminUpdate.name.value 			= name;
+	document.formAdminUpdate.family.value 	= family;
+	document.formAdminUpdate.date.value 		= date;
+	document.formAdminUpdate.email.value 		= email;
+  document.formAdminUpdate.password.value 		= password;
+	$('#updateAdmin').modal('show');
 }
 
 /*

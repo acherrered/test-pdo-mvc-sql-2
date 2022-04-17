@@ -4,9 +4,8 @@
 	Contacto: oscarfamado@gmail.com
 */
 
-
 class db{	
-	protected function connect(){
+	public function connect(){
 		try {
 			//$connect = new PDO('mysql:host=0.0.0.0;port=80;dbname=crud_mvc_pdo;charset=utf8;','root','');
 		//	$connect->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
@@ -56,6 +55,17 @@ class db{
     type TEXT
     )"
     );
+
+  $res = $connect->exec(
+    "CREATE TABLE IF NOT EXISTS admins (
+    id_admin INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    family TEXT,
+    date TEXT,
+    email TEXT,
+    password TEXT
+    )"
+  );
       
   return $connect;
       
