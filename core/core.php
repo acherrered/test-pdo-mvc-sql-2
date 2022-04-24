@@ -12,3 +12,4 @@ require_once('models/Hideouts.php');
 require_once('models/Admins.php');
 require_once('models/Targets.php');
 require_once('models/Login.php');
+require_once('models/Missions.php');

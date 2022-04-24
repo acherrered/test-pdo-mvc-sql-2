@@ -26,6 +26,9 @@
 
         <button type="button" onclick="readtargets();" class="btn btn-success">Targets list</button>
         <button type="button" onclick="ModalRegisterTarget();" class="btn btn-success">Add Targets</button>
+
+        <button type="button" onclick="readmissions();" class="btn btn-success">Missions list</button>
+        <button type="button" onclick="ModalRegisterMission();" class="btn btn-success">Add mission</button>
         
 			</center>
 			<br>

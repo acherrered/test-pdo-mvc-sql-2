@@ -118,6 +118,24 @@ function readtargets(){
 /***** targets ****/
 
 
+/***** missions ****/
+
+function readmissions(){
+        $.ajax({        
+        		type: 'POST',
+                url:   '?c=missions&m=table_missions',               
+                beforeSend: function () {
+                        $("#information").html("Procesando, espere por favor...");
+                },
+                success:  function (response) {
+                        $("#information").html(response);
+                }
+        });
+}
+
+/***** targets ****/
+
+
 function register(){
 	name 		= document.formUser.name.value;
 	last_name 	= document.formUser.last_name.value;
@@ -228,6 +246,50 @@ function registertarget(){
 	}
 ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 ajax.send("name="+name+"&family="+family+"&identification="+identification+"&nationality="+nationality+"&id="+id);
+}	
+
+function getSelectValues(select) {
+  var result = [];
+  var options = select && select.options;
+  var opt;
+
+  for (var i=0, iLen=options.length; i<iLen; i++) {
+    opt = options[i];
+
+    if (opt.selected) {
+      result.push(opt.value || opt.text);
+    }
+  }
+  return result;
+}
+
+function registermission(){
+	title 		= document.formMission.title.value;
+  discription = document.formMission.discription.value;
+	identification 		= document.formMission.identification.value;
+  country = document.formMission.country.value;
+  type 		= document.formMission.type.value;
+  status = document.formMission.status.value;
+  speciality = document.formMission.speciality.value;
+  agents = getSelectValues(document.formMission.agents).join();
+  //console.log(getSelectValues(document.formMission.agents).join());
+  //agents = document.formMission.agents.value;
+  //hideouts = document.formMission.hideouts.value;
+  hideouts = getSelectValues(document.formMission.hideouts).join();
+  targets = getSelectValues(document.formMission.targets).join();
+  start_date = document.formMission.start_date.value;
+  end_date = document.formMission.end_date.value;
+	ajax = objectAjax();
+	ajax.open("POST", "?c=missions&m=registermission", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){			
+			read();			
+			alert('Data saved successfully.');			
+			$('#addMission').modal('hide');
+		}
+	}
+ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ajax.send("title="+title+"&discription="+discription+"&identification="+identification+"&country="+country+"&type="+type+"&status="+status+"&speciality="+speciality+"&agents="+agents+"&hideouts="+hideouts+"&targets="+targets+"&start_date="+start_date+"&end_date="+end_date+"&id="+id);
 }	
 
 
@@ -350,6 +412,31 @@ ajax.send("name="+name+"&family="+family+"&identification="+identification+"&nat
 }
 
 
+function updatemission(){
+	id 			= document.formMissionUpdate.id.value;
+	title 			= document.formMissionUpdate.title.value;
+	discription 			= document.formMissionUpdate.discription.value;
+  identification 			= document.formMissionUpdate.identification.value;
+  country 			= document.formMissionUpdate.country.value;
+  type 			= document.formMissionUpdate.type.value;
+  status 			= document.formMissionUpdate.status.value;
+  speciality 			= document.formMissionUpdate.speciality.value;
+	start_date 			= document.formMissionUpdate.start_date.value;
+	end_date 			= document.formMissionUpdate.end_date.value;  
+
+	ajax = objectAjax();
+	ajax.open("POST", "?c=missions&m=updatemission", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){
+			readmissions();
+			$('#updateMission').modal('hide');
+		}
+	}
+ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ajax.send("title="+title+"&discription="+discription+"&identification="+identification+"&country="+country+"&type="+type+"&status="+status+"&speciality="+speciality+"&start_date="+start_date+"&end_date="+end_date+"&id="+id);
+}
+
+
 
 function deleteUser(id){	
 	if(confirm('¿Esta seguro de eliminar este registro?')){						
@@ -435,6 +522,20 @@ function deleteTarget(id){
 	}
 }
 
+function deleteMission(id){	
+	if(confirm('Are you sure you want to delete this agent?')){						
+	ajax = objectAjax();
+	ajax.open("POST", "?c=missions&m=deletemission", true);
+	ajax.onreadystatechange=function() {
+		if(ajax.readyState==4){			
+			readmissions();		
+		}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("id="+id);
+	}
+}
+
 
 
 function ModalRegister(){
@@ -459,6 +560,10 @@ function ModalRegisterAdmin(){
 
 function ModalRegisterTarget(){
 	$('#addTarget').modal('show');
+}
+
+function ModalRegisterMission(){
+	$('#addMission').modal('show');
 }
 
 
@@ -518,6 +623,22 @@ document.formTargetUpdate.id.value 			= id;
 	document.formTargetUpdate.identification.value 		= identification;
 	document.formTargetUpdate.nationality.value 		= nationality;
 	$('#updateTarget').modal('show');
+}
+
+function ModalUpdateMission(id,title,discription,identification,country,type,status,speciality,start_date,end_date){			
+document.formMissionUpdate.id.value 			= id;
+	document.formMissionUpdate.title.value 			= title;
+	document.formMissionUpdate.discription.value 	= discription;
+  document.formMissionUpdate.identification.value 		= identification;
+	document.formMissionUpdate.country.value 		= country;
+  document.formMissionUpdate.type.value 		= type;
+	document.formMissionUpdate.status.value 		= status;
+	document.formMissionUpdate.speciality.value 		= speciality;
+	document.formMissionUpdate.start_date.value 		= start_date;
+	document.formMissionUpdate.end_date.value 		= end_date;
+  
+  
+	$('#updateMission').modal('show');
 }
 
 /*
