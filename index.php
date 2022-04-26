@@ -1,11 +1,13 @@
 <?php
+ //session_start();
+
 require_once 'core/core.php';
 
 $c = isset($_GET['c']) ? $_GET['c'] : 'administrator';
 //$c = 'administratorController';
 $m = isset($_GET['m']) ? $_GET['m'] : 'index';
 $c .= 'Controller';
-var_dump($m, $c);
+//var_dump($m, $c);
 if (file_exists('controllers/' . $c . '.php')) {
     require_once 'controllers/' . $c . '.php';
     if (method_exists($c, $m)) {

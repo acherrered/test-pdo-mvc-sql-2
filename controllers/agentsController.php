@@ -42,10 +42,10 @@ class agentsController extends Agents{
 			<td>
 			  <div class="btn-group">
 			    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-			    Seleccionar <span class="caret"></span></button>
+			    Select <span class="caret"></span></button>
 			    <ul class="dropdown-menu" role="menu">
-			      <li><a href="#" onclick="ModalUpdateAgent('<?php echo $data->id_agent; ?>','<?php echo $data->name; ?>','<?php echo $data->family_name; ?>','<?php echo $data->birthdate; ?>','<?php echo $data->identification; ?>','<?php echo $data->nationality; ?>','<?php echo $data->speciality; ?>');">Actualizar</a></li>
-			      <li><a href="#" onclick="deleteAgent('<?php echo $data->id_agent; ?>');">Borrar</a></li>
+			      <li><a href="#" onclick="ModalUpdateAgent('<?php echo $data->id_agent; ?>','<?php echo $data->name; ?>','<?php echo $data->family_name; ?>','<?php echo $data->birthdate; ?>','<?php echo $data->identification; ?>','<?php echo $data->nationality; ?>','<?php echo $data->speciality; ?>');">Edit</a></li>
+			      <li><a href="#" onclick="deleteAgent('<?php echo $data->id_agent; ?>');">Delete</a></li>
 			    </ul>
 			  </div>
 			</td>
