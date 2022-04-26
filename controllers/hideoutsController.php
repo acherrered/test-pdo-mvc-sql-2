@@ -1,8 +1,5 @@
 <?php
-/*
-	CRUD creado por Oscar Amado
-	Contacto: oscarfamado@gmail.com
-*/
+
 class hideoutsController extends Hideouts{
 
 	function index(){
