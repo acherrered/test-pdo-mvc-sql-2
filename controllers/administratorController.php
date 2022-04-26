@@ -1,8 +1,5 @@
 <?php
-/*
-	CRUD creado por Oscar Amado
-	Contacto: oscarfamado@gmail.com
-*/
+
 class administratorController extends Administrator{
 
 	function index(){

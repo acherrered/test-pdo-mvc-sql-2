@@ -696,7 +696,3 @@ document.formMissionUpdate.id.value 			= id;
 	$('#updateMission').modal('show');
 }
 
-/*
-	CRUD creado por Oscar Amado
-	Contacto: oscarfamado@gmail.com
-*/

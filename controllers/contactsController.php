@@ -1,8 +1,5 @@
 <?php
-/*
-	CRUD creado por Oscar Amado
-	Contacto: oscarfamado@gmail.com
-*/
+
 class contactsController extends Contacts{
 
 	function index(){
