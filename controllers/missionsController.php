@@ -31,6 +31,9 @@ class missionsController extends Missions{
 				<th>status</th>
         <th>speciality</th>
         <th>Agents</th>
+        <th>Targets</th>
+        <th>Hideouts</th>
+        <th>Contacts</th>
         <th>start_date</th>
         <th>end_date</th>
 				</tr>
@@ -49,15 +52,18 @@ class missionsController extends Missions{
 			<td><?php echo $data->status; ?> </td>
 			<td><?php echo $data->speciality; ?> </td>
 			<td><?php echo $data->agent_family_name; ?> </td>
+			<td><?php echo $data->target_name; ?> </td>
+			<td><?php echo $data->hideout_address; ?> </td>
+			<td><?php echo $data->contact_name; ?> </td>
 			<td><?php echo $data->start_date; ?> </td>
 			<td><?php echo $data->end_date; ?> </td>
 			<td>
 			  <div class="btn-group">
 			    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-			    Seleccionar <span class="caret"></span></button>
+			    Select <span class="caret"></span></button>
 			    <ul class="dropdown-menu" role="menu">
-			      <li><a href="#" onclick="ModalUpdateMission('<?php echo $data->id_mission; ?>','<?php echo $data->title; ?>','<?php echo $data->discription; ?>','<?php echo $data->identification; ?>','<?php echo $data->country; ?>','<?php echo $data->type; ?>','<?php echo $data->status; ?>','<?php echo $data->speciality; ?>','<?php echo $data->start_date; ?>','<?php echo $data->end_date; ?>');">Actualizar</a></li>
-			      <li><a href="#" onclick="deleteMission('<?php echo $data->id_mission; ?>');">Borrar</a></li>
+			      <li><a href="#" onclick="ModalUpdateMission('<?php echo $data->id_mission; ?>','<?php echo $data->title; ?>','<?php echo $data->discription; ?>','<?php echo $data->identification; ?>','<?php echo $data->country; ?>','<?php echo $data->type; ?>','<?php echo $data->status; ?>','<?php echo $data->speciality; ?>','<?php echo $data->start_date; ?>','<?php echo $data->end_date; ?>','<?php echo $data->ids_agent; ?>','<?php echo $data->ids_hideout; ?>','<?php echo $data->ids_contact; ?>','<?php echo $data->ids_target; ?>');">Edit</a></li>
+			      <li><a href="#" onclick="deleteMission('<?php echo $data->id_mission; ?>');">Delete</a></li>
 			    </ul>
 			  </div>
 			</td>
@@ -85,6 +91,8 @@ class missionsController extends Missions{
       		'speciality'		=> $_REQUEST['speciality'],
       		'agents'		=> $_REQUEST['agents'],
       		'hideouts'		=> $_REQUEST['hideouts'],
+      		'targets'		=> $_REQUEST['targets'],
+      		'contacts'		=> $_REQUEST['contacts'],
       		'start_date'		=> $_REQUEST['start_date'],
       		'end_date'		=> $_REQUEST['end_date']
 					);		
@@ -101,11 +109,15 @@ class missionsController extends Missions{
       		'type' 		=> $_REQUEST['type'],
 					'status' => $_REQUEST['status'],
       		'speciality'		=> $_REQUEST['speciality'],
+      		'agents'		=> $_REQUEST['agents'],
+      		'hideouts'		=> $_REQUEST['hideouts'],
+      		'targets'		=> $_REQUEST['targets'],
+      		'contacts'		=> $_REQUEST['contacts'],
       		'start_date'		=> $_REQUEST['start_date'],
       		'end_date'		=> $_REQUEST['end_date']
 					);
 			parent::set_update_mission($data);
-    var_dump($data);
+    //var_dump($data);
 	}    
     
 }

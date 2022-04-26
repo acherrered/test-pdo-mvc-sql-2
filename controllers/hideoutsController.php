@@ -39,10 +39,10 @@ class hideoutsController extends Hideouts{
 			<td>
 			  <div class="btn-group">
 			    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-			    Seleccionar <span class="caret"></span></button>
+			    Select <span class="caret"></span></button>
 			    <ul class="dropdown-menu" role="menu">
-			      <li><a href="#" onclick="ModalUpdateHideout('<?php echo $data->id_hideout; ?>','<?php echo $data->address; ?>','<?php echo $data->country; ?>','<?php echo $data->identification; ?>','<?php echo $data->type; ?>');">Actualizar</a></li>
-			      <li><a href="#" onclick="deleteHideout('<?php echo $data->id_hideout; ?>');">Borrar</a></li>
+			      <li><a href="#" onclick="ModalUpdateHideout('<?php echo $data->id_hideout; ?>','<?php echo $data->address; ?>','<?php echo $data->country; ?>','<?php echo $data->identification; ?>','<?php echo $data->type; ?>');">Edit</a></li>
+			      <li><a href="#" onclick="deleteHideout('<?php echo $data->id_hideout; ?>');">Delete</a></li>
 			    </ul>
 			  </div>
 			</td>

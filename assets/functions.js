@@ -164,7 +164,7 @@ function registeragent(){
 	ajax.open("POST", "?c=agents&m=registeragent", true);
 	ajax.onreadystatechange=function() {
 		if(ajax.readyState==4){			
-			read();			
+			readagents();			
 			alert('Data saved successfully.');			
 			$('#addAgent').modal('hide');
 		}
@@ -202,7 +202,7 @@ function registerhideout(){
 	ajax.open("POST", "?c=hideouts&m=registerhideout", true);
 	ajax.onreadystatechange=function() {
 		if(ajax.readyState==4){			
-			read();			
+			readhideouts();			
 			alert('Data saved successfully.');			
 			$('#addHideout').modal('hide');
 		}
@@ -239,7 +239,7 @@ function registertarget(){
 	ajax.open("POST", "?c=targets&m=registertarget", true);
 	ajax.onreadystatechange=function() {
 		if(ajax.readyState==4){			
-			read();			
+			readtargets();			
 			alert('Data saved successfully.');			
 			$('#addTarget').modal('hide');
 		}
@@ -277,19 +277,31 @@ function registermission(){
   //hideouts = document.formMission.hideouts.value;
   hideouts = getSelectValues(document.formMission.hideouts).join();
   targets = getSelectValues(document.formMission.targets).join();
+  contacts = getSelectValues(document.formMission.contacts).join();
   start_date = document.formMission.start_date.value;
   end_date = document.formMission.end_date.value;
 	ajax = objectAjax();
 	ajax.open("POST", "?c=missions&m=registermission", true);
 	ajax.onreadystatechange=function() {
-		if(ajax.readyState==4){			
+    
+		if(ajax.readyState==4){		
+      if(ajax.responseText==1) {
+  			readmissions();			
+  			alert('Data saved successfully.');			
+  			$('#addMission').modal('hide');
+      } else {
+        alert(ajax.responseText);
+      }
+		}
+    
+		/*if(ajax.readyState==4){			
 			read();			
 			alert('Data saved successfully.');			
 			$('#addMission').modal('hide');
-		}
+		}*/
 	}
 ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-ajax.send("title="+title+"&discription="+discription+"&identification="+identification+"&country="+country+"&type="+type+"&status="+status+"&speciality="+speciality+"&agents="+agents+"&hideouts="+hideouts+"&targets="+targets+"&start_date="+start_date+"&end_date="+end_date+"&id="+id);
+ajax.send("title="+title+"&discription="+discription+"&identification="+identification+"&country="+country+"&type="+type+"&status="+status+"&speciality="+speciality+"&agents="+agents+"&hideouts="+hideouts+"&contacts="+contacts+"&targets="+targets+"&start_date="+start_date+"&end_date="+end_date+"&id="+id);
 }	
 
 
@@ -323,7 +335,7 @@ function updateagent(){
 	ajax.open("POST", "?c=agents&m=updateagent", true);
 	ajax.onreadystatechange=function() {
 		if(ajax.readyState==4){
-			read();
+			readagents();
 			$('#updateAgent').modal('hide');
 		}
 	}
@@ -343,7 +355,7 @@ function updatecontact(){
 	ajax.open("POST", "?c=contacts&m=updatecontact", true);
 	ajax.onreadystatechange=function() {
 		if(ajax.readyState==4){
-			read();
+			readcontacts();
 			$('#updateContact').modal('hide');
 		}
 	}
@@ -423,17 +435,28 @@ function updatemission(){
   speciality 			= document.formMissionUpdate.speciality.value;
 	start_date 			= document.formMissionUpdate.start_date.value;
 	end_date 			= document.formMissionUpdate.end_date.value;  
+  agents = getSelectValues(document.formMissionUpdate.agents).join();
+  //console.log(getSelectValues(document.formMission.agents).join());
+  //agents = document.formMission.agents.value;
+  //hideouts = document.formMission.hideouts.value;
+  hideouts = getSelectValues(document.formMissionUpdate.hideouts).join();
+  targets = getSelectValues(document.formMissionUpdate.targets).join();
+  contacts = getSelectValues(document.formMissionUpdate.contacts).join();
 
 	ajax = objectAjax();
 	ajax.open("POST", "?c=missions&m=updatemission", true);
 	ajax.onreadystatechange=function() {
 		if(ajax.readyState==4){
-			readmissions();
-			$('#updateMission').modal('hide');
+      if(ajax.responseText==1) {
+  			readmissions();
+  			$('#updateMission').modal('hide');
+      } else {
+        alert(ajax.responseText);
+      }
 		}
 	}
 ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-ajax.send("title="+title+"&discription="+discription+"&identification="+identification+"&country="+country+"&type="+type+"&status="+status+"&speciality="+speciality+"&start_date="+start_date+"&end_date="+end_date+"&id="+id);
+ajax.send("title="+title+"&discription="+discription+"&identification="+identification+"&country="+country+"&type="+type+"&status="+status+"&speciality="+speciality+"&agents="+agents+"&hideouts="+hideouts+"&contacts="+contacts+"&targets="+targets+"&start_date="+start_date+"&end_date="+end_date+"&id="+id);
 }
 
 
@@ -625,7 +648,7 @@ document.formTargetUpdate.id.value 			= id;
 	$('#updateTarget').modal('show');
 }
 
-function ModalUpdateMission(id,title,discription,identification,country,type,status,speciality,start_date,end_date){			
+function ModalUpdateMission(id,title,discription,identification,country,type,status,speciality,start_date,end_date,agents,hideouts,contacts,targets){			
 document.formMissionUpdate.id.value 			= id;
 	document.formMissionUpdate.title.value 			= title;
 	document.formMissionUpdate.discription.value 	= discription;
@@ -636,7 +659,39 @@ document.formMissionUpdate.id.value 			= id;
 	document.formMissionUpdate.speciality.value 		= speciality;
 	document.formMissionUpdate.start_date.value 		= start_date;
 	document.formMissionUpdate.end_date.value 		= end_date;
-  
+
+  // Update agents select 
+	var element = document.formMissionUpdate.agents;
+  //var element = document.getElementById('agents');
+  var values = agents.split(",");
+  for (var i = 0; i < element.options.length; i++) {
+      element.options[i].selected = values.indexOf(element.options[i].value) >= 0;
+  }
+
+  // Update hideouts select
+	var element = document.formMissionUpdate.hideouts;
+  //var element = document.getElementById('hideouts');
+  var values = hideouts.split(",");
+  for (var i = 0; i < element.options.length; i++) {
+      element.options[i].selected = values.indexOf(element.options[i].value) >= 0;
+  }
+
+  // Update contacts select
+	var element = document.formMissionUpdate.contacts;
+  //var element = document.getElementById('contacts');
+  var values = contacts.split(",");
+  for (var i = 0; i < element.options.length; i++) {
+      element.options[i].selected = values.indexOf(element.options[i].value) >= 0;
+  }
+
+  // Update targets select
+	var element = document.formMissionUpdate.targets;
+  //var element = document.getElementById('targets');
+  var values = targets.split(",");
+  for (var i = 0; i < element.options.length; i++) {
+      element.options[i].selected = values.indexOf(element.options[i].value) >= 0;
+  }
+
   
 	$('#updateMission').modal('show');
 }

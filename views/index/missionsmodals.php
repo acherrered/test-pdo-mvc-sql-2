@@ -100,7 +100,7 @@
                         //$db = db::connect();
                         $records = $db->prepare('SELECT * FROM contacts');
                         $records->execute();
-                        $hideouts = $records->fetchAll();
+                        $contacts = $records->fetchAll();
 
                       ?>
                       <select id="contacts" name="contacts[]" multiple>
@@ -121,13 +121,13 @@
                         //$db = db::connect();
                         $records = $db->prepare('SELECT * FROM targets');
                         $records->execute();
-                        $hideouts = $records->fetchAll();
+                        $targets = $records->fetchAll();
 
                       ?>
                       <select id="targets" name="targets[]" multiple>
                         <option value="0">Select targets</option>
                         <?php foreach($targets as $k=>$v) { ?>
-                          <option value="<?php echo $v["id_target"]; ?>"><?php echo $v["family_name"]; ?></option>
+                          <option value="<?php echo $v["id_target"]; ?>"><?php echo $v["name"]; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -160,7 +160,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Update contact</h4>
+                <h4 class="modal-title">Update mission</h4>
             </div>
             <div class="modal-body">
                 <form name="formMissionUpdate" onsubmit="updatemission(); return false">
@@ -214,12 +214,53 @@
                       <?php  ?>
                       <select id="agents" name="agents" multiple>
                         <option value="0">Select agents</option>
-                        <option value="1">Agent 1</option>
-                        <option value="2">Agent 2</option>
-                        <option value="3">Agent 3</option>
+                        <?php foreach($agents as $k=>$v) { ?>
+                          <option value="<?php echo $v["id_agent"]; ?>"><?php echo $v["family_name"]; ?></option>
+                        <?php } ?>
                       </select>
                     </div>
+
+                  <br>
+                  
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <select id="hideouts" name="hideouts[]" multiple>
+                        <option value="0">Select hideouts</option>
+                        <?php foreach($hideouts as $k=>$v) { ?>
+                          <option value="<?php echo $v["id_hideout"]; ?>"><?php echo $v["address"]; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  
                                       <br>
+
+                  
+                  
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <select id="contacts" name="contacts[]" multiple>
+                        <option value="0">Select contacts</option>
+                        <?php foreach($contacts as $k=>$v) { ?>
+                          <option value="<?php echo $v["id_contact"]; ?>"><?php echo $v["family_name"]; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                                      
+                                      <br>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <select id="targets" name="targets[]" multiple>
+                        <option value="0">Select targets</option>
+                        <?php foreach($targets as $k=>$v) { ?>
+                          <option value="<?php echo $v["id_target"]; ?>"><?php echo $v["name"]; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+
+
+
+                  -------------------------
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="start_date" type="date" class="form-control" name="start_date"

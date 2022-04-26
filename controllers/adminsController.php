@@ -43,10 +43,10 @@ class adminsController extends admins{
 			<td>
 			  <div class="btn-group">
 			    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-			    Seleccionar <span class="caret"></span></button>
+			    Select <span class="caret"></span></button>
 			    <ul class="dropdown-menu" role="menu">
-			      <li><a href="#" onclick="ModalUpdateAdmin('<?php echo $data->id_admin; ?>','<?php echo $data->name; ?>','<?php echo $data->family; ?>','<?php echo $data->date; ?>','<?php echo $data->email; ?>','<?php echo $data->password; ?>');">Actualizar</a></li>
-			      <li><a href="#" onclick="deleteAdmin('<?php echo $data->id_admin; ?>');">Borrar</a></li>
+			      <li><a href="#" onclick="ModalUpdateAdmin('<?php echo $data->id_admin; ?>','<?php echo $data->name; ?>','<?php echo $data->family; ?>','<?php echo $data->date; ?>','<?php echo $data->email; ?>','<?php echo $data->password; ?>');">Edite</a></li>
+			      <li><a href="#" onclick="deleteAdmin('<?php echo $data->id_admin; ?>');">Delete</a></li>
 			    </ul>
 			  </div>
 			</td>
